@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/hello/{param}', function ($param) {
@@ -19,8 +19,9 @@ Route::get('/hello/{param}', function ($param) {
         'param' => $param
     ];
     return view('create-customer',$model);
-});*/
+});
 
 Route::get('/create-customer/{param1}/{param2}','App\Http\Controllers\CreateAccountController@execute');
-Route::get('/create-customer','App\Http\Controllers\CreateAccountController@index');
+Route::get('/create-customer','App\Http\Controllers\CreateAccountController@index');*/
 
+Route::resource('photos','App\Http\Controllers\Admin\PhotoController');
