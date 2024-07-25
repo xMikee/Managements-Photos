@@ -24,4 +24,11 @@ Route::get('/hello/{param}', function ($param) {
 Route::get('/create-customer/{param1}/{param2}','App\Http\Controllers\CreateAccountController@execute');
 Route::get('/create-customer','App\Http\Controllers\CreateAccountController@index');*/
 
-Route::resource('photos','App\Http\Controllers\Admin\PhotoController');
+//Route::resource('photos','App\Http\Controllers\Admin\PhotoController');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->middleware('auth')->group(function (){
+    Route::resource('photos','PhotoController');
+});

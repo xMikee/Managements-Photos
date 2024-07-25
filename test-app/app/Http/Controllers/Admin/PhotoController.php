@@ -26,7 +26,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('photos.create');
     }
 
     /**
@@ -34,7 +34,20 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required | max:100',
+                'url' =>  'required | max:100'
+            ]
+        );
+
+        $photo = new Photo();
+        $photo->title = $request->title;
+        $photo->url = $request->url;
+        $photo->save();
+
+        return redirect()->route('photos.index')->with('success', 'Immagine aggiunta correttamente');
+
     }
 
     /**
@@ -53,7 +66,11 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
+        $data = [
+          "photo" => $photo
+        ];
+
+        return view('photos.edit',$data);
     }
 
     /**
@@ -61,7 +78,18 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required | max:100',
+                'url' =>  'required | max:100'
+            ]
+        );
+
+        $photo->title = $request->title;
+        $photo->url = $request->url;
+        $photo->save();
+
+        return redirect()->route('photos.index')->with('success', 'Immagine aggiornata correttamente');
     }
 
     /**
@@ -69,6 +97,7 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        $photo->delete();
+        return redirect()->route('photos.index')->with('success', 'Immagine eliminata correttamente');
     }
 }
