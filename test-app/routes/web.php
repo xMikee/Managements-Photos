@@ -25,7 +25,9 @@ Route::get('/create-customer/{param1}/{param2}','App\Http\Controllers\CreateAcco
 Route::get('/create-customer','App\Http\Controllers\CreateAccountController@index');*/
 
 //Route::resource('photos','App\Http\Controllers\Admin\PhotoController');
-
+Route::get('/', function () {
+    return view('index');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
